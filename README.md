@@ -8,6 +8,7 @@
 - Vanilla JS & DOM - Online Bank 原生 JS 和 DOM 实现的简易网上银行
 - OOP JS & API - Workout Record on Map 地图选点记录个人运动经历的 Web 应用
 - Real-World Practice - Recipe Finder & Uploader 功能仿下厨房一类 App 的菜谱查询和上传应用
+- CRUD - Node practice Express + ejs 模板引擎构建的学生信息管理系统，练习登录页和常见的增删查改功能
 
 ## 待办事项
 

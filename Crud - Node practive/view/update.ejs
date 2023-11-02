@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>update</h1>
+    <form action="/update-student" method="post">
+      <!-- 隐藏表单 -->
+      <input type="text" name="id" value="<%=student.id%>" hidden />
+      <div>
+        name: <input type="text" name="name" value="<%=student.name%>" />
+      </div>
+      <div>
+        age:
+        <input
+          type="number"
+          max="150"
+          min="0"
+          name="age"
+          value="<%=student.age%>"
+        />
+      </div>
+
+      <div>
+        gender: <input type="radio" name="gender" value="male" <%=student.gender
+        === 'male' && "checked" %>/>男 <input type="radio" name="gender"
+        value="female" <%=student.gender === 'female' && "checked" %> /> 女
+      </div>
+      <div>
+        address:
+        <input type="text" name="address" value="<%=student.address%>" />
+      </div>
+      <div>
+        <button>add</button>
+      </div>
+    </form>
+  </body>
+</html>
