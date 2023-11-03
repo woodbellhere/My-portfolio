@@ -8,7 +8,7 @@
 - Vanilla JS & DOM - Online Bank 原生 JS 和 DOM 实现的简易网上银行
 - OOP JS & API - Workout Record on Map 地图选点记录个人运动经历的 Web 应用
 - Real-World Practice - Recipe Finder & Uploader 功能仿下厨房一类 App 的菜谱查询和上传应用
-- CRUD - Node practice Express + ejs 模板引擎构建的学生信息管理系统，练习登录页和常见的增删查改功能
+- CRUD - Node practice Express + ejs 模板引擎构建的学生信息管理系统，练习常见的增删查改和 cookie 与 session 概念
 
 ## 待办事项
 
@@ -31,6 +31,10 @@
 - [ ] 新增购物车部分，食谱中增加一键购买功能，按份数在购物车中增加相应原料
 - [ ] 增加每周食谱规划功能，随机选择 n 天的食谱
 - [ ] 若有余力， 引入其他营养成分计算 API，并在食谱中同时给出基于原料数量的卡路里量
+
+### Node practice
+
+- [ ] node 正处于 cjs 和 es module 过渡期，很多 es 模块操作还是会报错，花时间把这个修一下
 
 ### 面向所有作品
 
