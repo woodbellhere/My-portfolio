@@ -1,15 +1,13 @@
 import express from "express";
 import * as path from "path";
 import { fileURLToPath } from "url";
-import fs from "fs/promises";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+import FileStore from "session-file-store";
+FileStore(session);
 // fs也要传promise版本的
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// 顺便用fs导入json
-let studentArr = JSON.parse(
-  await fs.readFile(path.resolve(__dirname, "./data/students.json"))
-);
 
 const app = express();
 // 配置模板引擎
@@ -18,83 +16,84 @@ app.set("views", path.resolve(__dirname, "view"));
 // 配置静态资源目录和body解析
 app.use(express.static(path.resolve(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(
+  session({
+    store: new FileStore({
+      path: path.resolve(__dirname, "./sessions"),
+      secret: "hello",
+      // ttl:10 session重启时间
+    }),
+    secret: "hello",
+  })
+);
 
-// 修改i需要跳转到一个表单页面。表单页面提交修改又要跳转到一个新路由
-app.post("/update-student", (req, res) => {
-  // 获取学生id
-  const { id, name, age, gender, address } = req.body;
-  const student = studentArr.find((item) => item.id === id);
-  student.name = name;
-  student.age = +age;
-  student.gender = gender;
-  student.address = address;
+// 设置和“删除”cookie的方式
+// app.get("set", (req, res) => {
+//   res.cookie("name", "woodbell", {
+//     maxAge: 1000 * 60 * 60,
+//   });
+//   res.send("cookie set");
+// });
 
-  fs.writeFile(
-    path.resolve(__dirname, "./data/students.json"),
-    JSON.stringify(studentArr)
-  )
-    .then(() => {
-      res.redirect("/students"); //面向app.post开头的路径切换}
-    })
-    .catch(() => {});
-});
-app.get("/to-update", (req, res) => {
-  const id = +req.query.id;
-  // 获取要修改的学生的信息
-  const student = studentArr.find((item) => item.id === id);
-  res.render("update", { student });
-});
-app.get("/delete", (req, res) => {
-  app.get("/hello", (req, res) => res.send("hello"));
-  // 获取要删除的学生的id
-  const id = +req.query.id;
-  // 根据id删除学生
-  studentArr = studentArr.filter((stu) => stu.id !== id);
-  // 将新的数组写入到文件中
-  // 将新的数据写入到json文件中
-  fs.writeFile(
-    path.resolve(__dirname, "./data/students.json"),
-    JSON.stringify(studentArr)
-  )
-    .then(() => {
-      res.redirect("/students");
-    })
-    .catch(() => {});
-});
-app.get("/students", (req, res) => {
-  res.render("students", { studentArr });
-});
-app.post("/add-student", (req, res) => {
-  // 生成一个id
-  const id = studentArr.at(-1) ? studentArr.at(-1).id + 1 : 1;
-  // 1.获取用户填写的信息
-  const newUser = {
-    id,
-    name: req.body.name,
-    age: +req.body.age,
-    gender: req.body.gender,
-    address: req.body.address,
-  };
-  // 2. 验证用户信息（略）
+// app.get("/delete-cookie", (req, res) => {
+//   res.cookie("name", "", {
+//     maxAge: 0,
+//   });
+//   res.send("cookie delete");
+// });
 
-  // 3. 将用户信息添加到数组中
-  studentArr.push(newUser);
+// app.get("/get", (req, res) => {
+//   const name = req.cookies.name;
+// });
 
-  // 4. 返回响应
-  // res.send("添加成功！")
-  // 直接在添加路由中渲染ejs，会面临表单重复提交的问题
-  // res.render("students", { stus: STUDENT_ARR })
-  // 将新的数据写入到json文件中
-  fs.writeFile(
-    path.resolve(__dirname, "./data/students.json"),
-    JSON.stringify(studentArr)
-  )
-    .then(() => {
-      // res.redirect() 用来发起请求重定向
-      // 重定向的作用是告诉浏览器你向另外一个地址再发起一次请求
-      res.redirect("/students"); //面向app.post开头的路径切换}
-    })
-    .catch(() => {});
+// 设置和检验cookie
+// app.get("/get-cookie", (req, res) => {
+//   res.cookie("username", "admin");
+//   res.send("cookie has emitted");
+// });
+
+// app.get("/hello", (req, res) => {
+//   console.log(req.cookies);
+//   res.send("cookie get");
+// });
+
+app.use("/student", import("./Router/student"));
+
+app.get("/", (req, res) => {
+  res.render("login");
+});
+
+// 设置和使用session，注意，信息在req上
+// app.set("/set", (req, res) => {
+//   req.session.username = "woodbell";
+//   res.send("session check");
+// });
+
+// app.get("/get", (req, res) => {
+//   const username = req.session.username;
+//   console.log(username);
+//   res.send("session got");
+// });
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  if (username === "admin" && password === "123456") {
+    // 登录成功后将用户信息放入session,开发中会存对象
+    // 这里的session还是存在内存里，但同时的操作会去读磁盘里的session，需要手动马上存储
+    req.session.loginUser = username;
+    req.session.save(() => {
+      // res.cookie("username", username);
+      res.redirect("/student/list");
+    });
+  } else res.send("login failed");
+});
+
+app.get("/logout", (req, res) => {
+  // 同时要让session失效
+  req.session.destroy(() => {
+    res.redirect("/");
+  });
 });
 
 // 可以在所有路由的后边配置错误路由

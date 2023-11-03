@@ -21,6 +21,8 @@
     </style>
   </head>
   <body>
+    <h2>current user: <%=username%></h2>
+    <a href="/logout">logout</a>
     <hr>
     <% if(studentArr && studentArr.length > 0) { %>
     <table>
@@ -51,9 +53,9 @@
             <!-- 通过页面上加请求参数传id妙啊 -->
             <a 
               onclick="return confirm('are you sure?')"
-              href="/delete?id=<%=stu.id%>"
+              href="/student/delete?id=<%=stu.id%>"
                >delete</a>
-            <a href="/to-update?id=<%=stu.id%>">modify</a>
+            <a href="/student/to-update?id=<%=stu.id%>">modify</a>
           </td>
         </tr>
         <% }%>
@@ -63,7 +65,7 @@
     <p>the list is empty</p>
     <%}%>
 
-    <form action="/add-student" method="post">
+    <form action="/student/add" method="post">
       <div>name<input type="text" name="name" /></div>
       <div>age<input type="number" max="150" min="0" name="age" /></div>
       <div>

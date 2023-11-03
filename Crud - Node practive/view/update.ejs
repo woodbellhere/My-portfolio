@@ -7,9 +7,9 @@
   </head>
   <body>
     <h1>update</h1>
-    <form action="/update-student" method="post">
+    <form action="/student/update-student" method="post">
       <!-- 隐藏表单 -->
-      <input type="text" name="id" value="<%=student.id%>" hidden />
+      <input type="hidden" name="id" value="<%=student.id%>" />
       <div>
         name: <input type="text" name="name" value="<%=student.name%>" />
       </div>
