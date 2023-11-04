@@ -3,7 +3,7 @@
 ///////////////////////////////////////
 // Modal window
 
-const modal = document.querySelector(".modal");
+const modal: HTMLElement | null = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const btnsCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
