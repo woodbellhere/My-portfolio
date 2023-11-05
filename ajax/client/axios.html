@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <button id="btn1">button1</button>
+    <script>
+      axios.defaults.baseURL = "http://localhost:3000";
+      axios.interceptors.request.use(
+        function (config) {
+          console.log("interceptor is on");
+          // config.data.name = "xxx";
+          config.headers["Authorization"] = `Bearer ${localStorage.getItem(
+            "item"
+          )}`;
+          return config;
+        },
+        function (error) {
+          return Promise.reject(error);
+        }
+      );
+      document.getElementById("btn1").addEventListener("click", () => {
+        axios({
+          method: "POST",
+          url: "students",
+          data: {
+            name: "woodwood",
+            age: 18,
+            gender: "male",
+          },
+          params: {
+            id: 1,
+            name: "swk",
+          },
+          timeout: {},
+          transformRequest: [
+            function (data, headers) {
+              (data.name = "woodwoode"),
+                (headers["Content-type"] = "application/json");
+              return data;
+            },
+            function (data, headers) {
+              return data;
+            },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>

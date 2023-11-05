@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>this is client</h1>
+    <button id="btn">click me to load data</button>
+    <div id="root"></div>
+    <script>
+      const btn = document.getElementById("btn");
+      const root = document.getElementById("root");
+      btn.addEventListener("click", () => {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "json";
+        xhr.addEventListener("load", () => {
+          if (xhr.status === 200) {
+            const result = xhr.response;
+            if (result.status === "ok") {
+              const ul = document.createElement("ul");
+              root.appendChild(ul);
+              for (let stu of result.data) {
+                ul.insertAdjacentHTML(
+                  "beforeend",
+                  `<li>${stu.id} - ${stu.name} - ${stu.age} - ${stu.gender} - ${stu.address}</li>`
+                );
+              }
+            }
+          }
+        });
+        xhr.open("get", "http://localhost:3000/students");
+        xhr.send();
+      });
+    </script>
+  </body>
+</html>

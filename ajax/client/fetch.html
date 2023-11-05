@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+      }
+      td,
+      th {
+        font-size: 20px;
+        text-align: center;
+        border: 1px solid #eee;
+      }
+      caption {
+        font-size: 36px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>this is client</h1>
+    <button id="btn">click me to load data</button>
+    <button id="btn2">click me to load data2</button>
+    <div id="root"></div>
+    <script>
+      const btn = document.getElementById("btn");
+      const btn2 = document.getElementById("btn2");
+      const root = document.getElementById("root");
+      btn.addEventListener("click", () => {
+        fetch("http://localhost:3000/students")
+          .then((res) => {
+            if (res.status === 200) {
+              // console.log(res);
+              return res.json();
+            } else {
+              throw new Error("load failed");
+            }
+          })
+          .then((res) => {
+            if (res.status === "ok") {
+              const table = document.createElement("table");
+              root.appendChild(table);
+              table.insertAdjacentHTML(
+                "beforeend",
+                "<caption>student list</caption>"
+              );
+              // 渲染表头
+              table.insertAdjacentHTML(
+                "beforeend",
+                `
+                <thead>
+                  <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>age</th>
+                    <th>gender</th>
+                    <th>address</th>
+                  </tr>
+                </thead>`
+              );
+              // 拿对象方便
+              const tbody = document.createElement("tbody");
+              table.appendChild(tbody);
+
+              // 渲染表格
+              for (let stu of res.data) {
+                tbody.insertAdjacentHTML(
+                  "beforeend",
+                  `
+                  <tr>
+                    <td>${stu.id}</td>  
+                    <td>${stu.name}</td>  
+                    <td>${stu.age}</td>  
+                    <td>${stu.gender}</td>  
+                    <td>${stu.address}</td>  
+                  </tr>`
+                );
+              }
+            }
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err, "wrong");
+          });
+      });
+      btn2.addEventListener("click", () => {
+        fetch("http://localhost:3000/students", {
+          method: "POST",
+          // 如果通过body发数据，必须在请求头指定数据类型
+          body: JSON.stringify({
+            name: "白骨精",
+            age: 16,
+            gender: "female",
+            address: "盘丝洞",
+          }),
+          headers: {
+            "Content-type": "application/json",
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

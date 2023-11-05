@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn1">save</button>
+    <button id="btn2">load</button>
+    <hr />
+    <script>
+      const btn1 = document.getElementById("btn1");
+      const btn2 = document.getElementById("btn2");
+
+      btn1.addEventListener("click", () => {
+        // sessionStorage.setItem("name", "woodbell");
+        // sessionStorage.setItem("age", "18");
+        // sessionStorage.setItem("gender", "male");
+        // sessionStorage.setItem("address", "earth");
+        localStorage.setItem("name", "woodbell");
+        localStorage.setItem("age", "18");
+        localStorage.setItem("gender", "male");
+        localStorage.setItem("address", "earth");
+        console.log(localStorage);
+      });
+      btn2.addEventListener("click", () => {
+        // const name = sessionStorage.getItem("name");
+        // sessionStorage.removeItem("name");
+        // sessionStorage.clear();
+        // console.log(name);
+        const name = localStorage.getItem("name");
+        localStorage.removeItem("name");
+        localStorage.clear();
+        console.log(name);
+      });
+    </script>
+  </body>
+</html>
