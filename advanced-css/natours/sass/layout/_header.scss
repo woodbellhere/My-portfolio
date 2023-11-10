@@ -1,0 +1,42 @@
+.header {
+  height: 95vh;
+  /* 可以接受多张图层叠 */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero-small.jpg);
+  /* cover会试图贴合整个block的宽高 */
+  background-size: cover;
+  /* 缩放时背景的是什么位置保持不变，top就是下面下面先拉伸，上面最后才变这个需要隔三差五搞个图试试唤醒一下回忆 */
+  background-position: top;
+  /* 选点切图 polygon按图片的四个点选中图片，xy轴和css一样,分别是左上 右上 右下 左下 */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* clip-path: polygon(0 0 , 0 0, 100% 50%, 0 100%) */
+
+  /* 作为logo-box的容器 */
+  position: relative;
+}
+
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+.header__logo {
+  height: 3.5rem;
+}
+/* .logo:hover {
+  animation: moveInRight 1s ease-out; 
+}*/
+
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
