@@ -1,5 +1,7 @@
 .header {
   height: 95vh;
+  // 这个下margin基本是临时的
+  margin-bottom: 4rem;
   /* 可以接受多张图层叠 */
   background-image: linear-gradient(
       to right bottom,
@@ -15,6 +17,11 @@
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   /* clip-path: polygon(0 0 , 0 0, 100% 50%, 0 100%) */
+
+  @include respond(phone) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
 
   /* 作为logo-box的容器 */
   position: relative;

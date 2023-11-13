@@ -15,6 +15,16 @@
     box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
     text-align: center;
     cursor: pointer;
+
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3rem;
+      right: 3rem;
+    }
   }
 
   &_background {
@@ -29,9 +39,18 @@
       $color-primary-dark
     );
     z-index: 1000;
-    transition: transform 0.8s cubic-bezier(0.86, 0 0.07, 1);
+    transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
     // 点击导航按钮弹出目录页面就是这么做的
     // transform: scale(50);
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   &_nav {
@@ -78,7 +97,7 @@
         $color-white 50%
       );
       background-size: 230%;
-      transition: all 0.5s;
+      transition: all 0.4s;
 
       span {
         margin-right: 1.5rem;
@@ -110,10 +129,10 @@
     &,
     &::before,
     &::after {
-      display: inline-block;
       width: 3rem;
       height: 2px;
       background-color: $color-grey-dark-3;
+      display: inline-block;
     }
 
     &::before,
@@ -126,6 +145,8 @@
 
     &::before {
       top: -0.8rem;
+      // 对tranform做细致指定的属性
+      // transform-origin: left;
     }
 
     &::after {
@@ -138,5 +159,20 @@
   }
   &_button:hover &_icon::after {
     top: 1rem;
+  }
+
+  // 这个三横线按钮点击时中间横线消失，上下横线交叉的效果挺妙的
+  &_checkbox:checked + &_button &_icon {
+    background-color: transparent;
+  }
+
+  &_checkbox:checked + &_button &_icon::before {
+    top: 0;
+    transform: rotate(135deg);
+  }
+
+  &_checkbox:checked + &_button &_icon::after {
+    top: 0;
+    transform: rotate(-135deg);
   }
 }

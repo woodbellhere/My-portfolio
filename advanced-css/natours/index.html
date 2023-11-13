@@ -59,7 +59,9 @@
           <span class="heading-primary-sub">is where life happens</span>
         </h1>
         <!-- 这俩之间有个下margin 形成标记惯例好了 -->
-        <a href="#" class="btn btn-white btn-animated">Discover out stories</a>
+        <a href="#section-tours" class="btn btn-white btn-animated"
+          >Discover out stories</a
+        >
       </div>
     </header>
 
@@ -98,6 +100,27 @@
           <div class="col-1-of-2">
             <div class="composition">
               <img
+                srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w"
+                sizes="(max-width:56.25em) 20vw, (max-width:37.5em) 30vw, 300px"
+                alt="Photo 1"
+                class="composition_photo composition_photo-p1"
+                src="img/nat-1-large.jpg"
+              />
+              <img
+                srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 2000w"
+                sizes="(max-width:56.25em) 20vw, (max-width:37.5em) 30vw, 300px"
+                alt="Photo 2"
+                class="composition_photo composition_photo-p2"
+                src="img/nat-2-large.jpg"
+              />
+              <img
+                srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 3000w"
+                sizes="(max-width:56.25em) 20vw, (max-width:37.5em) 30vw, 300px"
+                alt="Photo 3"
+                class="composition_photo composition_photo-p3"
+                src="img/nat-3-large.jpg"
+              />
+              <!-- <img
                 src="img/nat-1-large.jpg"
                 alt="Photo 1"
                 class="composition_photo composition_photo-p1"
@@ -112,7 +135,7 @@
                 alt="Photo 3"
                 class="composition_photo composition_photo-p3"
               />
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
@@ -181,7 +204,7 @@
         </div>
       </section>
 
-      <section class="section-tours">
+      <section class="section-tours" id="section-tours">
         <div class="u-center-text u-margin-bottom-big">
           <h2 class="heading-secondary">Most popular tours</h2>
         </div>
@@ -212,7 +235,7 @@
                     <p class="card_price-only">Only</p>
                     <p class="card_price-value">$297</p>
                   </div>
-                  <a href="#" class="btn btn-white">Book now!</a>
+                  <a href="#popup" class="btn btn-white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -243,7 +266,7 @@
                     <p class="card_price-only">Only</p>
                     <p class="card_price-value">$497</p>
                   </div>
-                  <a href="#" class="btn btn-white">Book now!</a>
+                  <a href="#popup" class="btn btn-white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -274,7 +297,7 @@
                     <p class="card_price-only">Only</p>
                     <p class="card_price-value">$897</p>
                   </div>
-                  <a href="#" class="btn btn-white">Book now!</a>
+                  <a href="#popup" class="btn btn-white">Book now!</a>
                 </div>
               </div>
             </div>
@@ -379,7 +402,7 @@
                   <label for="email" class="form_label">Email address</label>
                 </div>
 
-                <div class="form_group">
+                <div class="form_group  u-margin-bottom-medium">
                   <div class="form_radio-group">
                     <input
                       type="radio"
@@ -419,7 +442,20 @@
 
     <footer class="footer">
       <div class="footer_logo-box">
-        <img src="img/logo-green-2x.png" alt="Full Logo" class="footer_logo" />
+        <picture class="footer_logo">
+          <source
+            srcset="
+              img/logo-green-small-1x.png 1x,
+              img/logo-green-small-2x.png 2x
+            "
+            media="(max-width:37.5em)"
+          />
+          <img
+            srcset="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x"
+            alt="Full Logo"
+            src="img/logo-green-2x.png"
+          />
+        </picture>
       </div>
       <div class="row">
         <div class="col-1-of-2">
@@ -427,9 +463,6 @@
             <ul class="footer_list">
               <li class="footer_item">
                 <a href="#" class="footer_link">Company</a>
-              </li>
-              <li class="footer_item">
-                <a href="#" class="footer_link">Contact us</a>
               </li>
               <li class="footer_item">
                 <a href="#" class="footer_link">Contact us</a>
@@ -455,6 +488,35 @@
         </div>
       </div>
     </footer>
+
+    <div class="popup" id="popup">
+      <div class="popup_content">
+        <div class="popup_left">
+          <img src="img/nat-8.jpg" alt="Tour photo" class="popup_img" />
+          <img src="img/nat-9.jpg" alt="Tour photo" class="popup_img" />
+        </div>
+        <div class="popup_right">
+          <!-- 通过跳转回原路由让target伪类自动失效 -->
+          <a href="#section-tours" class="popup_close">&times;</a>
+          <h2 class="heading-secondary u-margin-bottom-small">
+            Start booking now
+          </h2>
+          <h3 class="heading-tertiary u-margin-bottom-small">
+            Important &ndash; Please read these terms before booking
+          </h3>
+          <p class="popup_text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+            consequuntur culpa unde sit ad eos harum, ratione sint quis
+            consectetur labore, pariatur vel? Nobis, quibusdam! Cum animi porro
+            reprehenderit quia. Lorem ipsum, dolor sit amet consectetur
+            adipisicing elit. Laborum natus perferendis sed iste quo quibusdam
+            non ducimus consequuntur tenetur ipsa, deleniti rerum, ad similique
+            cum, accusantium deserunt labore eius beatae!
+          </p>
+          <a href="#" class="btn btn-green">Book now</a>
+        </div>
+      </div>
+    </div>
 
     <!-- <section class="grid-test">
       <div class="row">
