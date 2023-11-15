@@ -5,11 +5,18 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile:sass": "sass sass/main.scss css/style.css --watch"
+    "watch:sass": "sass sass/main.scss css/style.css --watch",
+    "compile:sass": "sass sass/main.scss css/style.css",
+    "concat:css": "concat -o css/style.concat.css css/icon-font.css css/style.css.map",
+    "prefix:css": "postcss -u autoprefixer -b 'last 10 versions' css/style.concat.css -d css/style.prefix.css",
+    "compress:css": "sass css/style.prefix.css css/style.css --output-style compressed"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "concat": "^1.0.3",
+    "postcss-cli": "^10.1.0",
     "sass": "^1.69.5"
   }
 }

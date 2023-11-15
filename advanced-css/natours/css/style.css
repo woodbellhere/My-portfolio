@@ -446,7 +446,7 @@ body {
   font-size: 6rem;
   font-weight: 100;
 }
-@media (max-width: 56.25em) {
+@media only screen and (max-width: 56.25em), only screen and (hover: none) {
   .card {
     height: auto;
     border-radius: 3px;
@@ -606,11 +606,18 @@ body {
   width: 15rem;
   height: 15rem;
   float: left;
-  position: relative;
-  clip-path: circle(50% at 50% 50%);
-  -webkit-shape-outside: circle(50% at 50% 50%);
-  shape-outside: circle(50% at 50% 50%);
   transform: translateX(-3rem) skewX(12deg);
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+  .story_shape {
+    clip-path: circle(50% at 50% 50%);
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    -webkit-shape-outside: circle(50% at 50% 50%);
+  }
 }
 @media (max-width: 37.5em) {
   .story_shape {
@@ -755,6 +762,13 @@ body {
   visibility: hidden;
   transition: all 0.3s;
 }
+@supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+  .popup {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
 .popup_content {
   position: absolute;
   top: 50%;
@@ -881,7 +895,7 @@ body {
 }
 
 .header {
-  height: 95vh;
+  height: 85vh;
   margin-bottom: 4rem;
   /* 可以接受多张图层叠 */
   background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero-small.jpg);
@@ -889,12 +903,22 @@ body {
   background-size: cover;
   /* 缩放时背景的是什么位置保持不变，top就是下面下面先拉伸，上面最后才变这个需要隔三差五搞个图试试唤醒一下回忆 */
   background-position: top;
-  /* 选点切图 polygon按图片的四个点选中图片，xy轴和css一样,分别是左上 右上 右下 左下 */
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  /* clip-path: polygon(0 0 , 0 0, 100% 50%, 0 100%) */
   /* 作为logo-box的容器 */
   position: relative;
+}
+@supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+  .header {
+    /* 选点切图 polygon按图片的四个点选中图片，xy轴和css一样,分别是左上 右上 右下 左下 */
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+}
+@media (min-resolution: 192dpi) and (min-width: 37.5em), (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em), (min-width: 125em) {
+  .header {
+    height: 95vh;
+    background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  }
 }
 @media (max-width: 37.5em) {
   .header {
