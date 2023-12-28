@@ -1,0 +1,1 @@
+function sum(...sums: number[]) {}

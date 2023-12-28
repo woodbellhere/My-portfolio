@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <template id="woodbell">
+      <h2>list of sth</h2>
+      <ul>
+        <li v-for="(movie, index) in movies" :key="index">
+          {{index+1}}-{{movie}}
+        </li>
+      </ul>
+      <input type="text" v-model="newMovie" /><button @click="addMovie">
+        add movie
+      </button>
+    </template>
+    <script src="../vueLib/vue.js"></script>
+    <script>
+      const App = {
+        template: "#woodbell",
+        data() {
+          return {
+            message: "hello world",
+            newMovie: "",
+            movies: ["express", "koa", "nest", "fastily"],
+          };
+        },
+        methods: {
+          addMovie() {
+            this.movies.push(this.newMovie);
+            this.newMovie = "";
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

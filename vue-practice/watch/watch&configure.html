@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <template id="woodbell">
+      <h2>{{info.name}}</h2>
+      <button @click="changeInfo">change info</button>
+      <button @click="changeInfoName">change info name</button>
+    </template>
+    <script src="../vueLib/vue.js"></script>
+    <script>
+      const App = {
+        template: "#woodbell",
+        data() {
+          return {
+            info: {
+              name: "woodbell",
+              age: 25,
+            },
+          };
+        },
+        watch: {
+          // info(newV, oldV) {
+          //   console.log(newV, oldV);
+          // },
+          info: {
+            handler: function (newV, oldV) {
+              console.log(newV, oldV);
+            },
+            deep: true,
+            immediate: true,
+          },
+        },
+        methods: {
+          changeInfo() {
+            this.info = { name: "bell" };
+          },
+          changeInfoName() {
+            this.info.name = "bell";
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

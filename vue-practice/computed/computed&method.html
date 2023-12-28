@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <template id="woodbell">
+      <h2>{{fullName}}</h2>
+      <h2>{{fullName}}</h2>
+      <h2>{{getFullName()}}</h2>
+      <h2>{{getFullName()}}</h2>
+    </template>
+    <script src="../vueLib/vue.js"></script>
+    <script>
+      const App = {
+        template: "#woodbell",
+        data() {
+          return {
+            message: "hello world",
+            firstName: "wood",
+            lastName: "bell",
+            score: "80",
+          };
+        },
+        computed: {
+          fullName() {
+            console.log("com run");
+            return this.firstName + " " + this.lastName;
+          },
+        },
+        methods: {
+          getFullName() {
+            console.log("fn run");
+            return this.firstName + " " + this.lastName;
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

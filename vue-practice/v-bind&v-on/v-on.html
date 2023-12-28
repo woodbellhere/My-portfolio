@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .area {
+        width: 200px;
+        height: 200px;
+        background: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <template id="woodbell">
+      <button @click="btnClick">btn1</button>
+      <div @mousemove="mouseMove" class="area"></div>
+      <button @click="counter++">{{counter}}</button>
+      <div @="{click:btnClick, mousemove:mouseMove}" class="area"></div>
+    </template>
+    <script src="../vueLib/vue.js"></script>
+    <script>
+      const App = {
+        template: "#woodbell",
+        data() {
+          return {
+            message: "hello world",
+            counter: 0,
+          };
+        },
+        methods: {
+          btnClick() {
+            console.log("btn1 clicked!");
+          },
+          mouseMove() {
+            console.log("mouse moved");
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

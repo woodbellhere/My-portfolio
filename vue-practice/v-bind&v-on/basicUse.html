@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <template id="woodbell">
+      <h2>{{message}}</h2>
+      <img :src="imgUrl" />
+      <a :href="link">link</a>
+    </template>
+    <script src="../vueLib/vue.js"></script>
+    <script>
+      const App = {
+        template: "#woodbell",
+        data() {
+          return {
+            message: "hello world",
+            link: "https://www.baidu.com",
+            imgUrl: "",
+          };
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

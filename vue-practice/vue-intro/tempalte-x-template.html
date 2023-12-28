@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="x-template" id="woodbell">
+      <div>
+        <h2>{{message}}</h2>
+        <h2>{{counter}}</h2>
+        <button @click="increase">+1</button>
+        <button @click="decrease">-1</button>
+      </div>
+    </script>
+    <script>
+      Vue.createApp({
+        template: "#woodbell",
+        data: function () {
+          return {
+            message: "hello world",
+            counter: 10,
+          };
+        },
+        methods: {
+          increase() {
+            console.log("added!");
+            this.counter++;
+          },
+          decrease() {
+            this.counter--;
+          },
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
