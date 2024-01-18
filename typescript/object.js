@@ -1,0 +1,16 @@
+let a = 123;
+let a2 = "123";
+let a3 = [];
+let a4 = {};
+let a5 = () => 213;
+let a6 = "123";
+let a7 = 123;
+let a8 = false;
+let a9 = {};
+let a10 = [];
+let a11 = () => 213;
+let a12 = 123;
+let a13 = "123";
+let a14 = [];
+let a15 = { name: 1 };
+export {};
