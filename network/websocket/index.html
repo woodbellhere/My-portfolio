@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div>
+        <ul></ul>
+        <input type="text" id="input" />
+        <button id="send">发送</button>
+        <button id="stop">停止</button>
+      </div>
+      <script>
+        const wss = new WebSocket("ws://localhost:8080");
+        wss.addEventListener("open", function (event) {
+          console.log("connection is on!");
+        });
+        let input = document.querySelector("#input");
+        let btn = document.querySelector("#send");
+        let list = document.querySelector("ul");
+        btn.addEventListener("click", function () {
+          if (input.value) {
+            wss.send(input.value);
+          }
+        });
+
+        wss.addEventListener("message", (e) => {
+          let li = document.createElement("li");
+          let data = JSON.parse(e.data);
+          if (data.type === 2) {
+            li.innerText = data.message;
+            list.appendChild(li);
+          }
+        });
+
+        let stop = document.querySelector("#stop");
+        stop.addEventListener("click", function () {
+          wss.close();
+        });
+      </script>
+    </div>
+  </body>
+</html>

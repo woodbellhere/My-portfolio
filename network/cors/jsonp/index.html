@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const jsonp = (name) => {
+        // 创建一个script标签
+        let script = document.createElement("script");
+        // 设置script标签的src属性，请求接口
+        script.src = `http://localhost:3000/api/jsonp?callback=${name}`;
+        // 将script标签添加到body中
+        document.body.appendChild(script);
+        // 返回一个promise对象
+        return new Promise((resolve) => {
+          // 设置window对象中callback函数，当请求接口返回数据时，执行回调函数
+          window[name] = (data) => {
+            resolve(data);
+          };
+        });
+      };
+
+      // 调用jsonp函数，传入参数callback+当前时间戳，请求接口
+      jsonp(`callback${new Date().getTime()}`).then((res) => {
+        // 请求成功，打印返回的数据
+        console.log(res);
+      });
+    </script>
+  </body>
+</html>

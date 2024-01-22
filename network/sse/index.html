@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div class="box">
+        <div class="message"></div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("keydown", (e) => {
+        if (e.keyCode === 13) {
+          const sse = new EventSource("http://localhost:3000/api/sse");
+          sse.addEventListener("message", () => {
+            document.getElementById("message").innerHTML += e.data;
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="send">发送</button>
+    <script>
+      const send = document.querySelector(".send");
+      send.addEventListener("click", () => {
+        navigator.sendBeacon("http://localhost:3000/api/b", new FormData());
+      });
+    </script>
+  </body>
+</html>

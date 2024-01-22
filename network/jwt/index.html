@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <div><span>account</span><input type="text" id="name" /></div>
+      <div><span>password</span> <input type="text" id="password" /></div>
+      <button id="btn">login</button>
+    </div>
+    <script>
+      const btn = document.querySelector("#btn");
+      const name = document.querySelector("#name");
+      const password = document.querySelector("#password");
+
+      btn.onclick = () => {
+        fetch("http://localhost:3000/api/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.value,
+            password: password.value,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("token", data.token);
+            location.href = "./list.html";
+          });
+      };
+    </script>
+  </body>
+</html>
