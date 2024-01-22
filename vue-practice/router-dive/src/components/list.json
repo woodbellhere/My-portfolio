@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "name": "some gold",
+      "price": 1000,
+      "id": 1
+    },
+    {
+      "name": "some wood",
+      "price": 200,
+      "id": 2
+    },
+    {
+      "name": "fake news",
+      "price": 6000,
+      "id": 3
+    }
+  ]
+}
